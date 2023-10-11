@@ -1,6 +1,6 @@
 import "./App.css";
-import Start from "./components/Start";
-import Questions from "./components/Questions";
+import Start from "./components/StartSection";
+import Questions from "./components/QuestionsSection";
 import React from "react";
 
 function App() {
