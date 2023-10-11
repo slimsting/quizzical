@@ -24,13 +24,13 @@ export default function Questions() {
         const quizData = data.results.map((question) => {
           let allAnswers = question.incorrect_answers;
 
-          const randomIndex = Math.floor(
-            Math.random() * allAnswers.length + 1 + 1
-          );
+          const randomIndex = Math.floor(Math.random() * allAnswers.length + 1);
 
           allAnswers.splice(randomIndex, 0, question.correct_answer);
 
           allAnswers.forEach((answer) => decode(answer));
+
+          allAnswers.sort(() => Math.random() - 0.5);
 
           return {
             id: nanoid(),
