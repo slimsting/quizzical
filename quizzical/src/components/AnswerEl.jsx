@@ -20,6 +20,10 @@ export default function AnswerEl({
     if (answer === correctAnswer) {
       dynamicStyle = { backgroundColor: "#94D7A2" };
     }
+
+    if (answer !== selectedAnswer && answer != correctAnswer) {
+      dynamicStyle = { opacity: "0.5" };
+    }
   } else {
     dynamicStyle =
       answer === selectedAnswer ? { backgroundColor: "#D6DBF5" } : {};

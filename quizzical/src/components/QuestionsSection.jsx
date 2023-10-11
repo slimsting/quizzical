@@ -14,7 +14,7 @@ export default function Questions() {
   useEffect(() => {
     async function initializeFormData() {
       const res = await fetch(
-        "https://opentdb.com/api.php?amount=5&category=9&difficulty=easy&type=multiple"
+        "https://opentdb.com/api.php?amount=5&category=18&difficulty=medium"
       );
       const data = await res.json();
       // console.log(data.results);
