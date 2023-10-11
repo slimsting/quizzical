@@ -18,7 +18,6 @@ main {
   background-color: #f5f7fb;
   width: 100vh;
   height: 100vh;
-  /* z-index: -4; */
   overflow: hidden;
 }
 h1 {
@@ -62,25 +61,20 @@ button:hover {
   left: -100px;
   border-radius: 50%;
 }
-/* #title {
-  color: #293264;
-  font-size: 3rem;
-  z-index: 3;
-  margin-bottom: 2rem;
-} */
+
 .questions-container {
   width: 100vh;
   display: flex;
   flex-direction: column;
   z-index: 2;
   padding: 1em 3em;
-  /* gap: em; */
 }
 .question {
   display: flex;
   flex-direction: column;
   gap: 0.2em;
-  margin-bottom: 1px solid grey;
+  border-bottom: 2px solid #dbdef0;
+  margin-bottom: 1em;
 }
 .answers {
   margin: 1em 0;

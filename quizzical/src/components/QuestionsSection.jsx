@@ -5,48 +5,52 @@ import QuestionEl from "./QuestionEl";
 import { QuizCompletedContext } from "./QuizCompletedContext";
 
 export default function Questions() {
-  const [formData, setFormData] = React.useState(null);
+  const [quizDB, setQuizDB] = React.useState(null);
   const [isQuizCompleted, setIsQuizCompleted] = React.useState(false);
-  const [isReset, setIsReset] = React.useState(false);
+  const [isPlayAgain, setIsPlayAgain] = React.useState(false);
   const [score, setScore] = React.useState(0);
   const [numberofQuestions, setNumberOfQuestions] = React.useState(0);
 
+  //fetch data from API and initialize data for use in the app (quizDB)
   useEffect(() => {
     async function initializeFormData() {
-      const res = await fetch(
-        "https://opentdb.com/api.php?amount=5&category=18&difficulty=medium"
-      );
-      const data = await res.json();
-      // console.log(data.results);
-
-      const quizData = data.results.map((question) => {
-        let allAnswers = question.incorrect_answers;
-
-        const randomIndex = Math.floor(
-          Math.random() * allAnswers.length + 1 + 1
+      try {
+        const res = await fetch(
+          "https://opentdb.com/api.php?amount=5&category=18&difficulty=medium"
         );
+        const data = await res.json();
+        // console.log(data.results);
 
-        allAnswers.splice(randomIndex, 0, question.correct_answer);
+        const quizData = data.results.map((question) => {
+          let allAnswers = question.incorrect_answers;
 
-        allAnswers.forEach((answer) => decode(answer));
+          const randomIndex = Math.floor(
+            Math.random() * allAnswers.length + 1 + 1
+          );
 
-        return {
-          id: nanoid(),
-          question: decode(question.question),
-          selectedAnswer: "",
-          correctAnswer: decode(question.correct_answer),
-          allAnswers: allAnswers,
-        };
-      });
+          allAnswers.splice(randomIndex, 0, question.correct_answer);
 
-      setFormData(quizData);
+          allAnswers.forEach((answer) => decode(answer));
+
+          return {
+            id: nanoid(),
+            question: decode(question.question),
+            selectedAnswer: "",
+            correctAnswer: decode(question.correct_answer),
+            allAnswers: allAnswers,
+          };
+        });
+        setQuizDB(quizData);
+      } catch (err) {
+        console.log("An error has occured retrrieving data" + err);
+      }
     }
 
     initializeFormData();
-  }, [isReset]);
+  }, [isPlayAgain]);
 
-  const questionsEl = formData
-    ? formData.map((question) => {
+  const questionsEl = quizDB
+    ? quizDB.map((question) => {
         return (
           <QuestionEl
             key={question.id}
@@ -63,7 +67,7 @@ export default function Questions() {
 
   function handleChange(e, questionID) {
     const value = e.target.value;
-    const newFormData = formData.map((question) => {
+    const newFormData = quizDB.map((question) => {
       if (question.id === questionID) {
         return {
           ...question,
@@ -75,15 +79,15 @@ export default function Questions() {
         };
       }
     });
-    setFormData(newFormData);
+    setQuizDB(newFormData);
   }
-  // console.log(isQuizCompleted);
+
   function handleCheckAnswers() {
     setIsQuizCompleted(true);
     let score = 0;
-    setNumberOfQuestions(formData.length);
+    setNumberOfQuestions(quizDB.length);
 
-    for (let question of formData) {
+    for (let question of quizDB) {
       if (question.selectedAnswer === question.correctAnswer) {
         score++;
       }
@@ -93,16 +97,15 @@ export default function Questions() {
   }
 
   function handlePlayAgain() {
-    setFormData(null);
+    setQuizDB(null);
     setIsQuizCompleted(false);
-    setIsReset((prevIsreset) => !prevIsreset);
+    setIsPlayAgain((prevIsreset) => !prevIsreset);
   }
   return (
     <>
       <QuizCompletedContext.Provider value={isQuizCompleted}>
-        {/* <h1 id="title">Click to select your prefered answer</h1> */}
         <div className="questions-container">{questionsEl && questionsEl}</div>
-        {!isQuizCompleted && formData && (
+        {!isQuizCompleted && quizDB && (
           <button onClick={handleCheckAnswers}>Check answers</button>
         )}
         {isQuizCompleted && (

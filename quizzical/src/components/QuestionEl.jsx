@@ -10,6 +10,7 @@ export default function QuestionEl({
   correctAnswer,
 }) {
   const allAnswersArr = allAnswers;
+
   const asnwersEl = allAnswersArr.map((answer) => {
     return (
       <AnswerEl
@@ -28,7 +29,6 @@ export default function QuestionEl({
     <div className="question">
       <h1>{question}</h1>
       <div className="answers">{asnwersEl}</div>
-      <hr></hr>
     </div>
   );
 }
