@@ -15,22 +15,34 @@ export default function AnswerEl({
   let dynamicStyle = null;
   if (isQuizCompleted) {
     if (answer === selectedAnswer) {
-      dynamicStyle = { backgroundColor: "#F8BCBC" };
+      dynamicStyle = {
+        backgroundColor: "#F8BCBC",
+        scale: "",
+        border: "none",
+        pointerEvents: "none",
+      };
     }
     if (answer === correctAnswer) {
-      dynamicStyle = { backgroundColor: "#94D7A2" };
+      dynamicStyle = {
+        backgroundColor: "#94D7A2",
+        scale: "",
+        border: "none",
+        pointerEvents: "none",
+      };
     }
 
     if (answer !== selectedAnswer && answer != correctAnswer) {
-      dynamicStyle = { opacity: "0.5" };
+      dynamicStyle = { opacity: "0.5", pointerEvents: "none" };
     }
   } else {
     dynamicStyle =
-      answer === selectedAnswer ? { backgroundColor: "#D6DBF5" } : {};
+      answer === selectedAnswer
+        ? { backgroundColor: "#D6DBF5", scale: "", border: "none" }
+        : {};
   }
 
   return (
-    <label className="option" style={dynamicStyle}>
+    <label className="answer-el" style={dynamicStyle}>
       <input
         type="radio"
         name={question}

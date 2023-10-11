@@ -28,7 +28,7 @@ export default function QuestionEl({
   return (
     <div className="question">
       <h1>{question}</h1>
-      <div className="answers">{asnwersEl}</div>
+      <div className="answers-container">{asnwersEl}</div>
     </div>
   );
 }

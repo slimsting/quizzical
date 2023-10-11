@@ -4,8 +4,10 @@
 
 body {
   font-family: "Karla", sans-serif;
+  /* font-family: "Roboto", sans-serif; */
   margin: 0;
   color: #4d5b9e;
+  background-color: darkgray;
 }
 
 main {
@@ -19,10 +21,13 @@ main {
   width: 100vh;
   height: 100vh;
   overflow: hidden;
+  border-radius: 2em;
 }
+
 h1 {
   margin: 0;
 }
+
 button {
   margin-top: 2em;
   border: none;
@@ -33,10 +38,20 @@ button {
   font-size: 1.2em;
   border-radius: 1.5em;
   z-index: 4;
+  cursor: pointer;
 }
 
 button:hover {
-  background-color: black;
+  background-color: #4d5b9e;
+  scale: 1.1;
+  transition: 0.1s;
+  box-shadow: 1px 2px 14px -3px rgba(0, 0, 0, 0.97);
+  -webkit-box-shadow: 1px 2px 14px -3px rgba(0, 0, 0, 0.97);
+  -moz-box-shadow: 1px 2px 14px -3px rgba(0, 0, 0, 0.97);
+}
+
+button:active {
+  background-color: #f8bcbc;
 }
 
 .blob {
@@ -55,6 +70,7 @@ button:hover {
   transform: rotate(30deg);
   border-radius: 60%;
 }
+
 #blob-2 {
   background-color: #deebf8;
   bottom: -200px;
@@ -69,6 +85,7 @@ button:hover {
   z-index: 2;
   padding: 1em 3em;
 }
+
 .question {
   display: flex;
   flex-direction: column;
@@ -76,25 +93,34 @@ button:hover {
   border-bottom: 2px solid #dbdef0;
   margin-bottom: 1em;
 }
-.answers {
-  margin: 1em 0;
+
+.answers-container {
+  margin: 1.2em 0;
   display: flex;
   gap: 2em;
+  font-size: 1.1em;
 }
 
-.option {
+.answer-el {
   border-radius: 1em;
-  border: 2px solid #293264;
+  border: 1px solid #4d5b9e;
   padding: 0.5em 1em;
   cursor: pointer;
 }
 
-.option:hover {
+.answer-el:hover {
   background-color: #d6dbf5;
+  border: none;
+  scale: 1.1;
+  transition: 0.2s;
 }
-.opton:active {
-  background-color: black;
+
+.answer-el:active {
+  background-color: #f8bcbc;
+  scale: 1.1;
+  transition: 0.2s;
 }
+
 .radio {
   display: none;
 }
