@@ -21,7 +21,6 @@ main {
   width: 100vh;
   height: 100vh;
   overflow: hidden;
-  border-radius: 2em;
 }
 
 h1 {
